@@ -13,7 +13,7 @@ module.exports = class Game {
       this.#positions[i] = Array( x );
       for( let j = 0; j < x; j++ ) {
         
-        this.#positions[i][j] = this.#flatIndex(i,j);
+        this.#positions[i][j] = this.#flatIndex(j,i);
 
       }
     }
@@ -22,7 +22,7 @@ module.exports = class Game {
   }
 
   #flatIndex(x,y) {
-    return x*this.#xdim + y;
+    return y*this.#xdim + x;
   }
 
   get state() {
@@ -81,16 +81,16 @@ module.exports = class Game {
       ||
       //one to the right
       ( 
-        (xyFlat+1) % x == x //next index is still within same row
+        Math.floor((x + 1) / this.#xdim) === Math.floor( x / this.#xdim )  //next index is still within same row
         &&
         positionsFlat[ xyFlat + 1 ] === null // and there is null 
       )
       ||
       //one to the left
       (
-        (xyFlat+1) % x == x //one to the left is within same row
+        Math.floor((x - 1) / this.#xdim) === Math.floor( x / this.#xdim )  //one to the left is within same row
         &&
-        positionsFlat[ xyFlat -1 ] === null
+        positionsFlat[ xyFlat - 1 ] === null
       )
     );
   }
