@@ -1,4 +1,4 @@
-module.exports = class Game {
+class Game {
 
   #positions = null;
   #xdim = 0;
@@ -59,6 +59,7 @@ module.exports = class Game {
   }
 
   #hasAdjacentNull(x, y) {
+    debugger
     if( this.#positions[x][y] === null ) return false;
 
     const xyFlat = this.#flatIndex(x, y);
@@ -97,3 +98,4 @@ module.exports = class Game {
 
 
 }
+
